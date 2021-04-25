@@ -1,8 +1,8 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class GameCommand
 {
-	protected float moveDistance = 50f;
-	public virtual void Move(Transform boxTrans) { }
-	public abstract void Execute(Transform boxTrans, GameCommand command);
+	GameObject gameObject;
+	public abstract void Execute();
 }

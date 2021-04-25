@@ -4,32 +4,39 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+    public int sizeX = 11;
+    public int sizeY = 23;
+    public GameObject boardSprite;
+    //Traditional tetris board is 10 by 22
+    private GameObject[,] board;
 
-    GameObject[,] board = new GameObject[10, 22];
+    private void Awake()
+    {
+        board = new GameObject[sizeX, sizeY];
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("I am running");
-
         createBoard();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        updateBoard();
+        //updateBoard();
     }
 
     void createBoard()
     {
-        for (int x = 0; x < 10; x++){
-            for (int y = 0; y < 22; y++){
-                board[x, y] = null;
+        for (int x = 0; x < board.GetLength(0); x++)
+        {
+            for (int y = 0; y < board.GetLength(1); y++)
+            {
+                GameObject newPiece = Instantiate(boardSprite, new Vector3Int(x, y, 0), Quaternion.identity, transform);
+                board[x, y] = newPiece;
             }
         }
-        Debug.Log("Board created");
     }
 
     void updateBoard()

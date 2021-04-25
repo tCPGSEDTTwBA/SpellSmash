@@ -1,55 +1,21 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 namespace CommandPattern
 {
     public class GameInputHandler : MonoBehaviour
     {
-        public Transform boxTrans;
-        private GameCommand buttonA, buttonD, buttonS, buttonLeftArrow, buttonRightArrow, buttonDownArrow;
+        public GameObject gameObject;
         public static List<GameCommand> oldCommands = new List<GameCommand>();
         public static bool shouldStartReplay;
 
-
-        void Start()
+        public void Move(InputAction.CallbackContext context)
         {
-            buttonA = new MoveLeft();
-            buttonLeftArrow = new MoveLeft();
-
-            buttonS = new MoveDown();
-            buttonDownArrow = new MoveDown();
-
-            buttonD = new MoveRight();
-            buttonRightArrow = new MoveRight();
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                buttonA.Execute(boxTrans, buttonA);
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                buttonLeftArrow.Execute(boxTrans, buttonLeftArrow);
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                buttonD.Execute(boxTrans, buttonD);
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                buttonRightArrow.Execute(boxTrans, buttonRightArrow);
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                buttonS.Execute(boxTrans, buttonS);
-            }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                buttonDownArrow.Execute(boxTrans, buttonDownArrow);
-            }
+            GameCommand command = new MoveCommand(gameObject, (Vector3)context.ReadValue<Vector2>());
+            oldCommands.Add(command);
+            command.Execute();
         }
     }
 }
