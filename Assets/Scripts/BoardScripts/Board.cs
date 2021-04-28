@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+    public Vector3 origin;
     public int sizeX = 11;
     public int sizeY = 23;
     public GameObject boardSprite;
-    //Traditional tetris board is 10 by 22
-    private GameObject[,] board;
-
-    private void Awake()
-    {
-        board = new GameObject[sizeX, sizeY];
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -21,32 +15,13 @@ public class Board : MonoBehaviour
         createBoard();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //updateBoard();
-    }
-
     void createBoard()
     {
-        for (int x = 0; x < board.GetLength(0); x++)
+        for (int x = 0; x < sizeX; x++)
         {
-            for (int y = 0; y < board.GetLength(1); y++)
+            for (int y = 0; y < sizeY; y++)
             {
-                GameObject newPiece = Instantiate(boardSprite, new Vector3Int(x, y, 0), Quaternion.identity, transform);
-                board[x, y] = newPiece;
-            }
-        }
-    }
-
-    void updateBoard()
-    {
-        for (int x = 0; x < 10; x++){
-            for (int y = 0; y < 22; y++){
-                if (board[x, y] != null){
-                    GameObject block = board[x, y];
-                    //block.displayBlock();
-                }
+                GameObject newPiece = Instantiate(boardSprite, new Vector3(origin.x + x, origin.y + y, origin.z + 0), Quaternion.identity, transform);
             }
         }
     }

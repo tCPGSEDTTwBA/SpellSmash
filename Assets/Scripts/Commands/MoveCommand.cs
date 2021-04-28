@@ -15,8 +15,9 @@ public class MoveCommand : GameCommand
         this.vector = vector;
     }
 
-    public override void Execute()
+    public override bool Execute()
     {
-        gameObject.transform.position -= vector*moveAmount;
+        gameObject.transform.position += vector*moveAmount;
+        return true;
     }
 }
