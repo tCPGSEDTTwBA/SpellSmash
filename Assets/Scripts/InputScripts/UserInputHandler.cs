@@ -12,20 +12,26 @@ public class UserInputHandler : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         if (activeObject != null) {
-            GameCommand command = new MoveCommand(activeObject, (Vector3)context.ReadValue<Vector2>());
-            oldCommands.Add(command);
+            Vector3 possibleMove = context.ReadValue<Vector2>();
+            //If the possible move is a free direction for the block, move that way
+            if(DirectionDirectory.HasKey(possibleMove)) {
+                if (activeObject.GetComponent<Block>().GetFreeDirections()[DirectionDirectory.GetDirection(possibleMove)]) {
+                    GameCommand command = new MoveCommand(activeObject, possibleMove);
+                    oldCommands.Add(command);
+                    command.Execute();
+                }
+            }
         }
     }
-    public void setActiveObject(GameObject activeObject)
+    public void SetActiveObject(GameObject activeObject)
     {
         this.activeObject = activeObject;
     }
 
-    public void clearActiveObject()
+    public void ClearActiveObject()
     {
         if (activeObject != null) {
             activeObject = null;
         }
     }
-
 }

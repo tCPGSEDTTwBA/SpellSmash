@@ -9,16 +9,25 @@ public class BlockHandler : MonoBehaviour
     public ObjectSpawner blockSpawner;
     public GameObject block;
 
+    private GameObject activeBlock;
+
     private void Start()
     {
-        GameObject block = SpawnBlock();
-        StoreBlockObject(block);
-        SetCurrentBlock(block);
+        GameObject newBlock = SpawnBlock();
+        userInputHandler.SetActiveObject(newBlock);
+        activeBlock = newBlock;
     }
 
-    public void SetCurrentBlock(GameObject block)
+    private void Update()
     {
-        userInputHandler.setActiveObject(block);
+        if(activeBlock != null) {
+            //If a block reaches the bottom, it is no longer the active block
+            if (activeBlock.GetComponent<Block>().GetFreeDirections()["DOWN"] == false) {
+                ClearActiveBlock();
+                activeBlock = SpawnBlock();
+                userInputHandler.SetActiveObject(activeBlock);
+            }
+        }
     }
 
     /*
@@ -34,5 +43,15 @@ public class BlockHandler : MonoBehaviour
     public void StoreBlockObject(GameObject block)
     {
         blockStore.AddBlock(block);
+    }
+
+    public GameObject GetActiveBlock()
+    {
+        return this.activeBlock;
+    }
+
+    public void ClearActiveBlock()
+    {
+        this.activeBlock = null;
     }
 }
