@@ -4,42 +4,24 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-
-    GameObject[,] board = new GameObject[10, 22];
+    public Vector3 origin;
+    public int sizeX = 11;
+    public int sizeY = 23;
+    public GameObject boardSprite;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("I am running");
-
         createBoard();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        updateBoard();
     }
 
     void createBoard()
     {
-        for (int x = 0; x < 10; x++){
-            for (int y = 0; y < 22; y++){
-                board[x, y] = null;
-            }
-        }
-        Debug.Log("Board created");
-    }
-
-    void updateBoard()
-    {
-        for (int x = 0; x < 10; x++){
-            for (int y = 0; y < 22; y++){
-                if (board[x, y] != null){
-                    GameObject block = board[x, y];
-                    //block.displayBlock();
-                }
+        for (int x = 0; x < sizeX; x++)
+        {
+            for (int y = 0; y < sizeY; y++)
+            {
+                GameObject newPiece = Instantiate(boardSprite, new Vector3(origin.x + x, origin.y + y, origin.z + 0), Quaternion.identity, transform);
             }
         }
     }
