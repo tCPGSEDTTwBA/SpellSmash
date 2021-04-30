@@ -4,58 +4,50 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    //Determines the amount of time between the next move command is created. The lower the value the faster the commands are made.
-    public float updateInterval;
-    private float nextInterval = 0f;
+    public bool isActive;
 
-    //Keeps track of where the block can move. Defaults to everywhere in the beginning.
-    private Dictionary<string, bool> freeDirections = new Dictionary<string, bool>() {
-        {"UP", true },
-        {"DOWN", true },
-        {"LEFT", true },
-        {"RIGHT", true }
-    };
+    /*
+     * Using array for O(1) speed
+     * Index 0: UP
+     * Index 1: DOWN
+     * Index 2: LEFT
+     * Index 3: RIGHT
+     */
+    private bool[] freeDirections = new bool[] { true, true ,true ,true };
 
-    public Dictionary<string, bool> GetFreeDirections()
+    public bool[] GetFreeDirections()
     {
         return freeDirections;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         CheckCollision();
-        if (Time.time >= nextInterval) {
-            nextInterval += updateInterval;
-            if (freeDirections["DOWN"]) {
-                new MoveCommand(this.gameObject, DirectionDictionary.GetDirection("DOWN")).Execute();
-            }
-        }
     }
 
     public void CheckCollision()
     {
-        //Cast a rays down, left and right
-        List<RaycastHit2D> hits = new List<RaycastHit2D>() {
+        RaycastHit2D[] raycasts = raycasts = new RaycastHit2D[] {
+            Physics2D.Raycast(transform.position, Vector2.up, 0),
             Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity),
             Physics2D.Raycast(transform.position, Vector2.left, Mathf.Infinity),
             Physics2D.Raycast(transform.position, Vector2.right, Mathf.Infinity)
         };
         //For each ray, do this
-        foreach(RaycastHit2D ray in hits) {
+        for (int x = 0; x < raycasts.Length; x++) {
             //Uncomment if you want to see rays
-            Debug.DrawLine(transform.position, ray.point);
-
+            //Debug.DrawLine(transform.position, raycasts[x].point);
             //If ray has hit something
-            if(ray.collider != null) {
+            if(raycasts[x].collider != null) {
                 //Get the distance from the block to the point of impact
-                float distance = Vector2.Distance(ray.point, transform.position);
+                float distance = Vector2.Distance(raycasts[x].point, transform.position);
 
                 /*If the distance is less than or equal to 0.5 (the width of the block) then the block is touching a collider
                 If the distance is more than 0.5 then the block is not touching anything and should be free to move in that direction*/
                 if (distance <= 0.5f) {
-                    freeDirections[ray.collider.gameObject.name.ToUpper()] = false;
+                    freeDirections[x] = false;
                 } else if(distance > 0.5f) {
-                    freeDirections[ray.collider.gameObject.name.ToUpper()] = true;
+                    freeDirections[x] = true;
                 }
             }
         }

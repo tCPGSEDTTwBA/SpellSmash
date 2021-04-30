@@ -15,7 +15,8 @@ public class UserInputHandler : MonoBehaviour
             Vector3 possibleMove = context.ReadValue<Vector2>();
             //If the possible move is a free direction for the block, move that way
             if(DirectionDictionary.HasKey(possibleMove)) {
-                if (activeObject.GetComponent<Block>().GetFreeDirections()[DirectionDictionary.GetDirection(possibleMove)]) {
+                //Disgusting but takes Vector3 -> String direction -> integer index
+                if (activeObject.GetComponent<Block>().GetFreeDirections()[DirectionDictionary.GetIndex(DirectionDictionary.GetDirection(possibleMove))]) {
                     GameCommand command = new MoveCommand(activeObject, possibleMove);
                     oldCommands.Add(command);
                     command.Execute();

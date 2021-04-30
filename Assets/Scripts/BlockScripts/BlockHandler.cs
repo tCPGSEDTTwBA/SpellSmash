@@ -10,6 +10,9 @@ public class BlockHandler : MonoBehaviour
     public GameObject block;
 
     private GameObject activeBlock;
+    //The lower the update interval, the faster command are issued to the active block
+    public float updateInterval;
+    private float nextInterval = 0f;
 
     private void Start()
     {
@@ -23,9 +26,18 @@ public class BlockHandler : MonoBehaviour
         if (activeBlock != null) {
             Block block = activeBlock.GetComponent<Block>();
             //Once you cannot keep moving down, you stop being the active block
-            if(!block.GetFreeDirections()["DOWN"]) {
+            if(!block.GetFreeDirections()[1]) {
+                activeBlock.layer = 0;
                 ClearActiveBlock();
-                SpawnBlock();
+                activeBlock = SpawnBlock();
+                userInputHandler.SetActiveObject(activeBlock);
+            }
+            //Send move command to block every interval
+            if (Time.time >= nextInterval) {
+                nextInterval += updateInterval;
+                if (block.GetFreeDirections()[DirectionDictionary.GetIndex("DOWN")]) {
+                    new MoveCommand(activeBlock, DirectionDictionary.GetDirection("DOWN")).Execute();
+                }
             }
         }
     }
@@ -37,7 +49,6 @@ public class BlockHandler : MonoBehaviour
     public GameObject SpawnBlock()
     {
         GameObject newBlockInstance = blockSpawner.SpawnGameObject(block, blockStore.transform);
-        newBlockInstance.name = newBlockInstance.name + Random.Range(0, int.MaxValue);
         return newBlockInstance;
     }
 

@@ -522,6 +522,7 @@ MonoBehaviour:
   blockStore: {fileID: 2074677026}
   blockSpawner: {fileID: 202174241}
   block: {fileID: 5192537136153749332, guid: da685307bfaef574591b26d406049206, type: 3}
+  updateInterval: 0.25
 --- !u!1 &1227707773
 GameObject:
   m_ObjectHideFlags: 0
