@@ -10,8 +10,6 @@ public class BlockHandler : MonoBehaviour
     public GameObject block;
 
     private GameObject activeBlock;
-    private float updateInterval = 0.25f;
-    private float nextInterval = 0;
 
     private void Start()
     {
@@ -24,18 +22,10 @@ public class BlockHandler : MonoBehaviour
     {
         if (activeBlock != null) {
             Block block = activeBlock.GetComponent<Block>();
-            //If a block reaches the bottom, it is no longer the active block
-            if (!block.GetFreeDirections()["DOWN"]) {
+            //Once you cannot keep moving down, you stop being the active block
+            if(!block.GetFreeDirections()["DOWN"]) {
                 ClearActiveBlock();
-                activeBlock = SpawnBlock();
-                userInputHandler.SetActiveObject(activeBlock);
-            } else {
-                if (Time.time >= nextInterval) {
-                    nextInterval += updateInterval;
-                    if (block.GetFreeDirections()["DOWN"]) {
-                        new MoveCommand(activeBlock, DirectionDictionary.GetDirection("DOWN")).Execute();
-                    }
-                }
+                SpawnBlock();
             }
         }
     }
@@ -64,5 +54,6 @@ public class BlockHandler : MonoBehaviour
     public void ClearActiveBlock()
     {
         this.activeBlock = null;
+        userInputHandler.ClearActiveObject();
     }
 }

@@ -13,10 +13,4 @@ public class ObjectSpawner : MonoBehaviour
     {
         return Instantiate(gameObject, transform.position, Quaternion.identity);
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawCube(transform.position, new Vector3(0.5f, 0.5f, 0.5f));
-    }
 }
