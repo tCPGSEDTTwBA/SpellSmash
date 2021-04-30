@@ -16,16 +16,6 @@ public class Block : MonoBehaviour
         {"RIGHT", true }
     };
 
-    private void Update()
-    {
-        //Executes a 'MoveCommand' downwards every interval.
-        if(Time.time >= nextInterval) {
-            nextInterval += updateInterval;
-            if(freeDirections["DOWN"]) {
-                new MoveCommand(this.gameObject, DirectionDirectory.GetDirection("DOWN")).Execute();
-            }
-        }
-    }
     public Dictionary<string, bool> GetFreeDirections()
     {
         return freeDirections;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-static class DirectionDirectory
+static class DirectionDictionary
 {
     private static Dictionary<Vector3, string> VECTOR_DIRECTIONS = new Dictionary<Vector3, string>()
     {
