@@ -23,7 +23,7 @@ public class @InputReader : IInputActionCollection, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""b98308cf-3f52-45e3-9eb5-86d1d683dfed"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": ""Normalize(max=1)"",
+                    ""processors"": """",
                     ""interactions"": """"
                 }
             ],

@@ -6,18 +6,18 @@ using UnityEngine.InputSystem;
 public class MoveCommand : GameCommand
 {
     private float moveAmount = 0.5f;
-    private GameObject gameObject;
+    private Rigidbody2D rigidBody;
     private Vector3 vector;
 
-    public MoveCommand(GameObject gameObject, Vector3 vector)
+    public MoveCommand(Rigidbody2D rigidbody, Vector3 vector)
     {
-        this.gameObject = gameObject;
+        this.rigidBody = rigidbody;
         this.vector = vector;
     }
 
     public override bool Execute()
     {
-        gameObject.transform.position += vector*moveAmount;
+        rigidBody.MovePosition((Vector3)rigidBody.position + vector);
         return true;
     }
 }
