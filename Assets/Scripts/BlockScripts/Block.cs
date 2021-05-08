@@ -20,7 +20,7 @@ public class Block : MonoBehaviour
         return freeDirections;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         CheckCollision();
     }
@@ -36,7 +36,7 @@ public class Block : MonoBehaviour
         //For each ray, do this
         for (int x = 0; x < raycasts.Length; x++) {
             //Uncomment if you want to see rays
-            //Debug.DrawLine(transform.position, raycasts[x].point);
+            Debug.DrawLine(transform.position, raycasts[x].point);
             //If ray has hit something
             if(raycasts[x].collider != null) {
                 //Get the distance from the block to the point of impact

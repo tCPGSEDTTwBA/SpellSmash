@@ -39,6 +39,11 @@ static class DirectionDictionary
         return "";
     }
 
+    public static string GetDirection(Vector2 direction)
+    {
+        return GetDirection((Vector3)direction);
+    }
+
     public static Vector3 GetDirection(string direction)
     {
         if (HasKey(direction)) {
@@ -65,5 +70,10 @@ static class DirectionDictionary
     public static bool HasKey(Vector3 key)
     {
         return VECTOR_DIRECTIONS.ContainsKey(key);
+    }
+
+    public static bool HasKey(Vector2 key)
+    {
+        return HasKey((Vector3)key);
     }
 }
