@@ -36,7 +36,7 @@ public class BlockHandler : MonoBehaviour
             if (Time.time >= nextInterval) {
                 nextInterval += updateInterval;
                 if (block.GetFreeDirections()[DirectionDictionary.GetIndex("DOWN")]) {
-                    new MoveCommand(activeBlock, DirectionDictionary.GetDirection("DOWN")).Execute();
+                    new MoveCommand(activeBlock.GetComponent<Rigidbody2D>(), DirectionDictionary.GetDirection("DOWN")).Execute();
                 }
             }
         }
