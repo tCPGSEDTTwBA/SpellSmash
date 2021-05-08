@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    public bool isActive;
+    public TextMeshProUGUI text;
+    private string value;
+
+    private void Awake()
+    {
+        this.value = Alphabet.GetRandomLetter().ToString();
+        text.text = this.value;
+    }
 
     /*
      * Using array for O(1) speed
@@ -18,6 +26,11 @@ public class Block : MonoBehaviour
     public bool[] GetFreeDirections()
     {
         return freeDirections;
+    }
+
+    public string GetValue()
+    {
+        return this.value;
     }
 
     private void Update()
