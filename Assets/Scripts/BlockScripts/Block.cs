@@ -33,6 +33,7 @@ public class Block : MonoBehaviour
         return this.value;
     }
 
+
     private void Update()
     {
         CheckCollision();
