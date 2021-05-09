@@ -20,7 +20,6 @@ public class BlockHandler : MonoBehaviour
         userInputHandler.SetActiveObject(newBlock);
         activeBlock = newBlock;
     }
-
     private void FixedUpdate()
     {
         if (activeBlock != null) {

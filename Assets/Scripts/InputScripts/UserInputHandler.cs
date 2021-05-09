@@ -12,8 +12,7 @@ public class UserInputHandler : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         if (activeObject != null) {
-            Vector3Int possibleMove = (Vector3Int) Vector2Int.RoundToInt(context.ReadValue<Vector2>());
-            Debug.Log(possibleMove);
+            Vector2Int possibleMove = Vector2Int.RoundToInt(context.ReadValue<Vector2>());
             //If the possible move is a free direction for the block, move that way
             if(DirectionDictionary.HasKey(possibleMove)) {
                 //Disgusting but takes Vector3 -> String direction -> integer index
@@ -25,6 +24,7 @@ public class UserInputHandler : MonoBehaviour
             }
         }
     }
+
     public void SetActiveObject(GameObject activeObject)
     {
         this.activeObject = activeObject;
