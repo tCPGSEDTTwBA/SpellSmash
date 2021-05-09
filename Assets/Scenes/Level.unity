@@ -706,9 +706,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 791987625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b213ddbd249cae43b61b767297f735a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c800108a7419bd40b9c45d3a160ac33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockStore: {fileID: 2074677026}
 --- !u!1 &866469212
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +981,7 @@ MonoBehaviour:
   blockStore: {fileID: 2074677026}
   blockSpawner: {fileID: 202174241}
   block: {fileID: 5192537136153749332, guid: da685307bfaef574591b26d406049206, type: 3}
+  wordHandler: {fileID: 791987627}
   updateInterval: 0.25
 --- !u!1 &1227707773
 GameObject:

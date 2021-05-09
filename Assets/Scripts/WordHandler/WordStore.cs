@@ -4,7 +4,7 @@ static class WordStore
 {
     private static ArrayList WORDS = new ArrayList()
     {
-        {"test"}
+        {"TEST"},
     };
 
     public static ArrayList getWords()

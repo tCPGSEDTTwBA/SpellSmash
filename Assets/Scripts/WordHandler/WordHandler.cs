@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WordHandler : MonoBehaviour
 {
+    public BlockStore blockStore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +19,24 @@ public class WordHandler : MonoBehaviour
         
     }
 
-    string GenerateWord(char[] characters)
+    public List<char> GetRow(GameObject block)
+    {
+        List<char> lettersOnRow = new List<char>();
+        if (blockStore.GetAllBlocks() != null)
+        {
+            var blocks = blockStore.GetAllBlocksByRow(block.transform.position.y).OrderBy(x => x.transform.position.x);
+
+            foreach (var blockOnRow in blocks)
+            {
+                lettersOnRow.Add(char.Parse(blockOnRow.GetComponent<Block>().GetValue()));
+            }
+
+            return lettersOnRow;
+        }
+        return new List<char>();
+    }
+
+    public string GenerateWord(List<char> characters)
     {
         string word = "";
 
@@ -28,7 +48,7 @@ public class WordHandler : MonoBehaviour
         return word;
     }
 
-    bool IsWordCorrect(string word)
+    public bool IsWordCorrect(string word)
     {
         var words = WordStore.getWords();
         if (words.Contains(word))
@@ -38,7 +58,7 @@ public class WordHandler : MonoBehaviour
         return false;
     }
 
-    int GetScore(string word)
+    public int GetScore(string word)
     {
         int score = 0;
 
