@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BlockStore : MonoBehaviour
@@ -23,15 +24,6 @@ public class BlockStore : MonoBehaviour
 
     public List<GameObject> GetAllBlocksByRow(float rowPos)
     {
-        List<GameObject> blocksOnRow = new List<GameObject>();
-        foreach (var block in blocks)
-        {
-            if(block.transform.position.y == rowPos)
-            {
-                blocksOnRow.Add(block);
-            }
-        };
-
-        return blocksOnRow;
+        return blocks.Where(block => block != null && block.transform.position.y == rowPos).ToList();
     }
 }

@@ -12,9 +12,6 @@ public class BlockHandler : MonoBehaviour
     public ScoreHandler scoreHandler;
 
     private GameObject activeBlock;
-    //The lower the update interval, the faster command are issued to the active block
-    public float updateInterval;
-    private float nextInterval = 0f;
 
     private void Start()
     {
@@ -29,25 +26,22 @@ public class BlockHandler : MonoBehaviour
             //Once you cannot keep moving down, you stop being the active block
             if(!block.GetFreeDirections()[1]) {
                 StoreBlockObject(activeBlock);
-
-                var word = wordHandler.ProcessWord(activeBlock);
-                if(word != string.Empty)
+                List<GameObject> wordBlocks = wordHandler.ParseRow(activeBlock);
+                string wordString = wordHandler.ParseWord(wordBlocks);
+                Debug.Log(wordString);
+                if(wordString != string.Empty)
                 {
-                    scoreHandler.CalculateScore(word);
-                    DestroyBlocks(wordHandler.GetBlocksToDestroy());
+                    scoreHandler.CalculateScore(wordString);
                 }
-                
+                if(wordBlocks != null && wordBlocks.Count > 0)
+                {
+                    wordBlocks.ForEach(x => Destroy(x));
+                }
+
                 activeBlock.layer = 0;
                 ClearActiveBlock();
                 activeBlock = SpawnBlock();
                 userInputHandler.SetActiveObject(activeBlock);
-            }
-            //Send move command to block every interval
-            if (Time.time >= nextInterval) {
-                nextInterval += updateInterval;
-                if (block.GetFreeDirections()[DirectionDictionary.GetIndex("DOWN")]) {
-                    new MoveCommand(activeBlock.GetComponent<Rigidbody2D>(), DirectionDictionary.GetDirection("DOWN")).Execute();
-                }
             }
         }
     }

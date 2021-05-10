@@ -8,10 +8,15 @@ public class Block : MonoBehaviour
     public TextMeshProUGUI text;
     private string value;
 
+    //The lower the update interval, the faster command are issued to the active block
+    public float updateInterval = 0.25f;
+
     private void Awake()
     {
         this.value = Alphabet.GetRandomLetter().ToString();
         text.text = this.value;
+
+        InvokeRepeating("MoveDown", 0.25f, updateInterval);
     }
 
     /*
@@ -22,6 +27,14 @@ public class Block : MonoBehaviour
      * Index 3: RIGHT
      */
     private bool[] freeDirections = new bool[] { true, true ,true ,true };
+
+    private void MoveDown()
+    {
+        if (freeDirections[DirectionDictionary.GetIndex("DOWN")])
+        {
+            new MoveCommand(this.GetComponent<Rigidbody2D>(), DirectionDictionary.GetDirection("DOWN")).Execute();
+        }
+    }
 
     public bool[] GetFreeDirections()
     {
