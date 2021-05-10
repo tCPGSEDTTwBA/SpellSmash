@@ -6,29 +6,38 @@ using UnityEngine;
 public class WordHandler : MonoBehaviour
 {
     public BlockStore blockStore;
+    private List<GameObject> blocksToRemove;
 
-    // Start is called before the first frame update
-    void Start()
+    public string ProcessWord(GameObject block)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        var letters = GetRow(block);
+        var word = GenerateWord(letters);
+        return IsWordCorrect(word);
     }
 
     public List<char> GetRow(GameObject block)
     {
         List<char> lettersOnRow = new List<char>();
-        if (blockStore.GetAllBlocks() != null)
+        blocksToRemove = new List<GameObject>();
+
+        if (blockStore.GetAllBlocks() != null && blockStore.GetAllBlocks().Count != 1)
         {
             var blocks = blockStore.GetAllBlocksByRow(block.transform.position.y).OrderBy(x => x.transform.position.x);
-
-            foreach (var blockOnRow in blocks)
+            for(int i = 0; i < blocks.Count(); i++)
             {
-                lettersOnRow.Add(char.Parse(blockOnRow.GetComponent<Block>().GetValue()));
+
+                lettersOnRow.Add(char.Parse(blocks.ElementAt(i).GetComponent<Block>().GetValue()));
+                blocksToRemove.Add(blocks.ElementAt(i));
+
+                if (blocks.ElementAt(i) == blocks.Last())
+                {
+                    break;
+                }
+
+                if (!(blocks.ElementAt(i).transform.position.x + 1 == blocks.ElementAt(i + 1).transform.position.x))
+                {
+                    lettersOnRow.Add(' ');
+                }
             }
 
             return lettersOnRow;
@@ -48,28 +57,21 @@ public class WordHandler : MonoBehaviour
         return word;
     }
 
-    public bool IsWordCorrect(string word)
+    public string IsWordCorrect(string word)
     {
-        var words = WordStore.getWords();
-        if (words.Contains(word))
+        var words = WordStore.GetWords();
+        foreach(string validWord in words)
         {
-            return true;
+            if (word.Contains(validWord))
+            {
+                return validWord;
+            }
         }
-        return false;
+        return string.Empty;
     }
 
-    public int GetScore(string word)
+    public List<GameObject> GetBlocksToDestroy()
     {
-        int score = 0;
-
-        var dictionary = LetterDictionary.getLetters();
-        var letterArray = word.ToCharArray();
-
-        foreach(char letter in letterArray)
-        {
-            score += dictionary[letter];
-        }
-
-        return score;
+        return blocksToRemove;
     }
 }

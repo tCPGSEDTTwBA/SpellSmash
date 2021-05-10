@@ -7,7 +7,7 @@ static class WordStore
         {"TEST"},
     };
 
-    public static ArrayList getWords()
+    public static ArrayList GetWords()
     {
         return WORDS;
     }

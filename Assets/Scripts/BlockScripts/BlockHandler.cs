@@ -9,6 +9,7 @@ public class BlockHandler : MonoBehaviour
     public ObjectSpawner blockSpawner;
     public GameObject block;
     public WordHandler wordHandler;
+    public ScoreHandler scoreHandler;
 
     private GameObject activeBlock;
     //The lower the update interval, the faster command are issued to the active block
@@ -29,19 +30,13 @@ public class BlockHandler : MonoBehaviour
             if(!block.GetFreeDirections()[1]) {
                 StoreBlockObject(activeBlock);
 
-                var lettersOnRow = wordHandler.GetRow(activeBlock);
-                var word = wordHandler.GenerateWord(lettersOnRow);
-                var isValid = wordHandler.IsWordCorrect(word);
-                if (isValid)
+                var word = wordHandler.ProcessWord(activeBlock);
+                if(word != string.Empty)
                 {
-                    var score = wordHandler.GetScore(word);
-                    Debug.Log(score);
+                    scoreHandler.CalculateScore(word);
+                    DestroyBlocks(wordHandler.GetBlocksToDestroy());
                 }
-                else
-                {
-                    Debug.Log("Invalid Word");
-                }
-
+                
                 activeBlock.layer = 0;
                 ClearActiveBlock();
                 activeBlock = SpawnBlock();
@@ -81,5 +76,13 @@ public class BlockHandler : MonoBehaviour
     {
         this.activeBlock = null;
         userInputHandler.ClearActiveObject();
+    }
+
+    private void DestroyBlocks(List<GameObject> stack)
+    {
+        foreach(GameObject block in stack)
+        {
+            Destroy(block);
+        }
     }
 }
