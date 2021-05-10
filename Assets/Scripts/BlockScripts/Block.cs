@@ -15,7 +15,10 @@ public class Block : MonoBehaviour
     {
         this.value = Alphabet.GetRandomLetter().ToString();
         text.text = this.value;
+    }
 
+    private void Start()
+    {
         InvokeRepeating("MoveDown", 0.25f, updateInterval);
     }
 
@@ -30,11 +33,20 @@ public class Block : MonoBehaviour
 
     private void MoveDown()
     {
-        if (freeDirections[DirectionDictionary.GetIndex("DOWN")])
+        if(freeDirections[1])
         {
-            new MoveCommand(this.GetComponent<Rigidbody2D>(), DirectionDictionary.GetDirection("DOWN")).Execute();
+            new MoveCommand(this.GetComponent<Rigidbody2D>(), Vector3.down).Execute();
         }
     }
+
+    /*public void TryMove(Vector3 vector)
+    {
+
+        if(freeDirections[DirectionDictionary.GetIndex(vector)])
+        {
+            
+        }
+    }*/
 
     public bool[] GetFreeDirections()
     {
