@@ -30,7 +30,8 @@ public class BlockHandler : MonoBehaviour
                 string wordString = wordHandler.ParseWord(wordBlocks);
                 if(wordString != string.Empty)
                 {
-                    scoreHandler.CalculateScore(wordString);
+                    var score = scoreHandler.CalculateScore(wordString);
+                    scoreHandler.AddToTotalScore(score);
                 }
                 if(wordBlocks != null && wordBlocks.Count > 0)
                 {

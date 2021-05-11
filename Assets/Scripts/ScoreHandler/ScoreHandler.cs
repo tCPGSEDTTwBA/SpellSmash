@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreHandler : MonoBehaviour
@@ -7,7 +5,7 @@ public class ScoreHandler : MonoBehaviour
 
     private int Score;
 
-    public void CalculateScore(string word)
+    public int CalculateScore(string word)
     {
         int score = 0;
 
@@ -22,6 +20,11 @@ public class ScoreHandler : MonoBehaviour
             }
         }
 
+        return score;
+    }
+
+    public void AddToTotalScore(int score)
+    {
         Score += score;
     }
 
