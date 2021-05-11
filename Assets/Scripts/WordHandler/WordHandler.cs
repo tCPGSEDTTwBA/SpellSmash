@@ -18,9 +18,15 @@ public class WordHandler : MonoBehaviour
     {
         List<GameObject> blocksOnRow = new List<GameObject>();
 
-        if (blockStore.GetAllBlocks() != null && blockStore.GetAllBlocks().Count != 1)
+        if (blockStore.GetAllBlocks() != null)
         {
-            var blocks = blockStore.GetAllBlocksByRow(block.transform.position.y).OrderBy(x => x.transform.position.x);
+            List<GameObject> blocks = blockStore.GetAllBlocksByRow(block.transform.position.y).OrderBy(x => x.transform.position.x).ToList();
+
+            if(blocks.Count() <= 1)
+            {
+                return blocks;
+            }
+
             for(int i = 0; i < blocks.Count(); i++)
             {
 
@@ -122,11 +128,11 @@ public class WordHandler : MonoBehaviour
             //If the pointer is equal to the length of array, there is a match
             if(pointer == charArray.Length)
             {
-                break;
+                return filteredBlocks;
             }
         }
 
-        return filteredBlocks;
+        return new List<GameObject>();
     }
 
     public string ParseWord(List<GameObject> blocks)

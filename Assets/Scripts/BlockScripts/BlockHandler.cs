@@ -25,9 +25,9 @@ public class BlockHandler : MonoBehaviour
             Block block = activeBlock.GetComponent<Block>();
             //Once you cannot keep moving down, you stop being the active block
             if(!block.GetFreeDirections()[1]) {
+                StoreBlock(activeBlock);
                 List<GameObject> wordBlocks = wordHandler.ParseRow(activeBlock);
                 string wordString = wordHandler.ParseWord(wordBlocks);
-                Debug.Log(wordString);
                 if(wordString != string.Empty)
                 {
                     scoreHandler.CalculateScore(wordString);
@@ -40,7 +40,6 @@ public class BlockHandler : MonoBehaviour
                 activeBlock.layer = 0;
                 ClearActiveBlock();
                 activeBlock = SpawnBlock();
-                StoreBlock(activeBlock);
                 userInputHandler.SetActiveObject(activeBlock);
             }
         }
