@@ -10,6 +10,7 @@ public class BlockHandler : MonoBehaviour
     public GameObject block;
     public WordHandler wordHandler;
     public ScoreHandler scoreHandler;
+    public PreviewScript nextLetterGUI;
 
     private GameObject activeBlock;
 
@@ -52,6 +53,7 @@ public class BlockHandler : MonoBehaviour
                 ClearActiveBlock();
                 activeBlock = SpawnBlock();
                 userInputHandler.SetActiveObject(activeBlock);
+                nextLetterGUI.RefreshText();
             }
         }
     }

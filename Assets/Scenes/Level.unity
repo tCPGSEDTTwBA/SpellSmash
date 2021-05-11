@@ -1275,6 +1275,7 @@ MonoBehaviour:
   block: {fileID: 5192537136153749332, guid: da685307bfaef574591b26d406049206, type: 3}
   wordHandler: {fileID: 791987627}
   scoreHandler: {fileID: 1763717162}
+  nextLetterGUI: {fileID: 1276955223}
 --- !u!1 &1227707773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1468,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa624ccea7ab442ad362ec102eaab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  previewTexts:
+  - {fileID: 1106540550}
+  - {fileID: 1443246379}
+  - {fileID: 1802203785}
 --- !u!1 &1443246377
 GameObject:
   m_ObjectHideFlags: 0
