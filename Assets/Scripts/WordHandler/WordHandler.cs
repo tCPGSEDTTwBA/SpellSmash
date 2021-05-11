@@ -31,7 +31,6 @@ public class WordHandler : MonoBehaviour
             {
 
                 blocksOnRow.Add(blocks.ElementAt(i));
-                //blocksToRemove.Add(blocks.ElementAt(i));
 
                 if (blocks.ElementAt(i) == blocks.Last())
                 {
