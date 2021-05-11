@@ -12,28 +12,6 @@ public class BlockStore : MonoBehaviour
         blocks = new List<GameObject>();
     }
 
-    private void Start()
-    {
-        InvokeRepeating("MoveBlocksDown", 0.25f, 0.25f);
-    }
-
-    private void MoveBlocksDown()
-    {
-        foreach(GameObject block in blocks)
-        {
-            if(block != null)
-            {
-                Block blockScript = block.GetComponent<Block>();
-                if (blockScript.GetFreeDirections()[1])
-                {
-                    Debug.Log(block.name);
-                    new MoveCommand(block.GetComponent<Rigidbody2D>(), Vector3.down).Execute();
-                }
-                
-            }
-        }
-    }
-
     public void AddBlock(GameObject block)
     {
         blocks.Add(block);

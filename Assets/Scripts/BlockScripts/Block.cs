@@ -39,15 +39,6 @@ public class Block : MonoBehaviour
         }
     }
 
-    /*public void TryMove(Vector3 vector)
-    {
-
-        if(freeDirections[DirectionDictionary.GetIndex(vector)])
-        {
-            
-        }
-    }*/
-
     public bool[] GetFreeDirections()
     {
         return freeDirections;
