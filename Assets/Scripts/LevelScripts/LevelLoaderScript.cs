@@ -7,8 +7,10 @@ public class LevelLoaderScript : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
+
     public void PlayGame()
     {
+        WordStore.GenerateWords();
         StartCoroutine(LoadLevel("Level"));
     }
 
