@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Alphabet
 {
-    public static char[] alphabet = "TE".ToCharArray();
+    public static char[] alphabet = "ABCDEFGHIJKLMNOPQRSTVWXYZ".ToCharArray();
 
     public static char GetRandomLetter()
     {
