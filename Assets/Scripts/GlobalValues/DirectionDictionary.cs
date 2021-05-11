@@ -52,6 +52,11 @@ static class DirectionDictionary
         return Vector3.zero;
     }
 
+    public static int GetIndex(Vector3 vector)
+    {
+        return DIRECTION_INDEX[VECTOR_DIRECTIONS[vector]];
+    }
+
     public static int GetIndex(string direction)
     {
         return DIRECTION_INDEX[direction];
