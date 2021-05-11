@@ -49,8 +49,12 @@ public class Block : MonoBehaviour
         return this.value;
     }
 
+    private void OnDestroy()
+    {
+        this.gameObject.layer = 2;
+    }
 
-    private void Update()
+    public void Update()
     {
         CheckCollision();
     }
@@ -65,13 +69,11 @@ public class Block : MonoBehaviour
         };
         //For each ray, do this
         for (int x = 0; x < raycasts.Length; x++) {
-            //Uncomment if you want to see rays
-            Debug.DrawLine(transform.position, raycasts[x].point);
+            text.text = value + " " + raycasts[1].distance.ToString() + "\n" + freeDirections[1];
             //If ray has hit something
             if(raycasts[x].collider != null) {
                 //Get the distance from the block to the point of impact
                 float distance = Vector2.Distance(raycasts[x].point, transform.position);
-
                 /*If the distance is less than or equal to 0.5 (the width of the block) then the block is touching a collider
                 If the distance is more than 0.5 then the block is not touching anything and should be free to move in that direction*/
                 if (distance <= 0.5f) {

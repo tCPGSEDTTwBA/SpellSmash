@@ -31,10 +31,21 @@ public class BlockHandler : MonoBehaviour
                 if(wordString != string.Empty)
                 {
                     scoreHandler.CalculateScore(wordString);
+                    Debug.Log(scoreHandler.GetScore());
                 }
                 if(wordBlocks != null && wordBlocks.Count > 0)
                 {
+                    wordBlocks.ForEach(x => x.transform.position = new Vector3(100, 100, 0));
                     wordBlocks.ForEach(x => Destroy(x));
+                    foreach(GameObject blockObject in blockStore.GetAllBlocks())
+                    {
+                        if (blockObject != null)
+                        {
+                            blockObject.layer = 2;
+                            blockObject.GetComponent<Block>().CheckCollision();
+                            blockObject.layer = 0;
+                        }
+                    }
                 }
 
                 activeBlock.layer = 0;

@@ -113,7 +113,7 @@ public class WordHandler : MonoBehaviour
             elementPointer++;
             string character = charArray[pointer].ToString();
             string blockValue = blocks.ElementAt(elementPointer).GetComponent<Block>().GetValue();
-            if(character == blockValue)
+            if (character == blockValue)
             {
                 filteredBlocks.Add(blocks.ElementAt(elementPointer));
                 pointer++;
