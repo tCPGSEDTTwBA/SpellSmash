@@ -108,7 +108,7 @@ public class WordHandler : MonoBehaviour
         
         int pointer = 0;
         int elementPointer = -1;
-        while(elementPointer < blocks.Count())
+        while(elementPointer < blocks.Count()-1)
         {
             elementPointer++;
             string character = charArray[pointer].ToString();

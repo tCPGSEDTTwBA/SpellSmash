@@ -13,7 +13,7 @@ public class Block : MonoBehaviour
 
     private void Awake()
     {
-        this.value = Alphabet.GetRandomLetter().ToString();
+        this.value = Alphabet.GetNextLetter().ToString();
         text.text = this.value;
     }
 
@@ -69,7 +69,6 @@ public class Block : MonoBehaviour
         };
         //For each ray, do this
         for (int x = 0; x < raycasts.Length; x++) {
-            text.text = value + " " + raycasts[1].distance.ToString() + "\n" + freeDirections[1];
             //If ray has hit something
             if(raycasts[x].collider != null) {
                 //Get the distance from the block to the point of impact
