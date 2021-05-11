@@ -6,6 +6,7 @@ using UnityEngine;
 public class WordHandler : MonoBehaviour
 {
     public BlockStore blockStore;
+    public ScoreHandler scoreHandler;
 
     public List<GameObject> ParseRow(GameObject block)
     {
@@ -22,9 +23,9 @@ public class WordHandler : MonoBehaviour
         {
             List<GameObject> blocks = blockStore.GetAllBlocksByRow(block.transform.position.y).OrderBy(x => x.transform.position.x).ToList();
 
-            if(blocks.Count() <= 1)
+            if(blocks.Count() == 1)
             {
-                return blocks;
+                return new List<GameObject>();
             }
 
             for(int i = 0; i < blocks.Count(); i++)
@@ -74,6 +75,9 @@ public class WordHandler : MonoBehaviour
     public List<GameObject> ParseWordFromRow(List<List<GameObject>> blockWord)
     {
         string wordString = "";
+        List<string> validWords = new List<string>();
+        Dictionary<string, int> wordScores = new Dictionary<string, int>();
+
         var words = WordStore.GetWords();
         foreach (List<GameObject> blockList in blockWord)
         {
@@ -83,8 +87,19 @@ public class WordHandler : MonoBehaviour
             {
                 if (wordString.Contains(validWord))
                 {
-                    return FilterBlocks(blockList, validWord);
+                    validWords.Add(validWord);
                 }
+            }
+            if(validWords != null && validWords.Count > 0)
+            {
+                foreach (var validWord in validWords)
+                {
+                    var score = scoreHandler.CalculateScore(validWord);
+                    wordScores.Add(validWord, score);
+                }
+                var highestScoringWord = wordScores.OrderByDescending(x => x.Value).First().Key;
+
+                return FilterBlocks(blockList, highestScoringWord);
             }
 
             //Set the string back to empty if the word was not found.
