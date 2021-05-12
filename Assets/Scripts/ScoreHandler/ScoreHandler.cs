@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScoreHandler : MonoBehaviour
 {
 
-    private int Score;
+    private int ScoreTotal;
     public TextMeshProUGUI text;
 
     public int CalculateScore(string word)
@@ -24,17 +24,21 @@ public class ScoreHandler : MonoBehaviour
             }
         }
 
-        text.text = "Score: " + Score;
         return score;
+    }
+
+    private void Update()
+    {
+        text.text = "Score: " + ScoreTotal.ToString();
     }
 
     public void AddToTotal(int score)
     {
-        this.Score += score;
+        this.ScoreTotal += score;
     }
 
     public int GetScore()
     {
-        return Score;
+        return ScoreTotal;
     }
 }
