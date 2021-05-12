@@ -24,7 +24,7 @@ public class @InputReader : IInputActionCollection, IDisposable
                     ""id"": ""b98308cf-3f52-45e3-9eb5-86d1d683dfed"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=1)""
                 }
             ],
             ""bindings"": [
@@ -124,11 +124,11 @@ public class @InputReader : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Pause"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""cda274c3-2e5b-4423-98a5-5926d8399c04"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [

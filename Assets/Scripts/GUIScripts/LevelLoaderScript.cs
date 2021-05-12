@@ -20,10 +20,22 @@ public class LevelLoaderScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void ReturnToMenu()
+    {
+        Time.timeScale = 1f;
+        StartCoroutine(LoadLevel("Menu"));
+    }
+
     private IEnumerator LoadLevel(string levelName)
     {
-        wizard.SetTrigger("Drop");
-        transition.SetTrigger("Start");
+        if(wizard != null)
+        {
+            wizard.SetTrigger("Drop");
+        }
+        if(transition != null)
+        {
+            transition.SetTrigger("Start");
+        }
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelName);
     }
