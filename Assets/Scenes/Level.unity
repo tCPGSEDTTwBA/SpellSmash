@@ -704,7 +704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   m_Padding:
     m_Left: 0
     m_Right: 0
@@ -720,11 +719,9 @@ MonoBehaviour:
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!1 &264943294
-=======
   blockStore: {fileID: 2074677026}
   scoreHandler: {fileID: 1763717162}
 --- !u!1 &866469212
->>>>>>> c97578730b16a789b3e1919ad3e798db52afd94e
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -967,7 +964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
@@ -1052,7 +1048,6 @@ MonoBehaviour:
   wordHandler: {fileID: 791987627}
   scoreHandler: {fileID: 1763717162}
 --- !u!1 &1227707773
->>>>>>> c97578730b16a789b3e1919ad3e798db52afd94e
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
