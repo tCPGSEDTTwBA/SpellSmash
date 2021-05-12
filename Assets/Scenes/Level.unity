@@ -745,6 +745,10 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &297937532
 CanvasRenderer:
+  blockStore: {fileID: 2074677026}
+  scoreHandler: {fileID: 1763717162}
+--- !u!1 &866469212
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1086,6 +1090,31 @@ MonoBehaviour:
     m_Bits: 4294967295
 --- !u!114 &567365709
 MonoBehaviour:
+  userInputHandler: {fileID: 666170925}
+  blockStore: {fileID: 2074677026}
+  blockSpawner: {fileID: 202174241}
+  block: {fileID: 5192537136153749332, guid: da685307bfaef574591b26d406049206, type: 3}
+  wordHandler: {fileID: 791987627}
+  scoreHandler: {fileID: 1763717162}
+--- !u!1 &1227707773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227707774}
+  - component: {fileID: 1227707775}
+  m_Layer: 6
+  m_Name: Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1227707774
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
