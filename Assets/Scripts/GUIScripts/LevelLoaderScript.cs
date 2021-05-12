@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class LevelLoaderScript : MonoBehaviour
 {
     public Animator transition;
-    public float transitionTime = 1f;
+    public Animator wizard;
+    public float transitionTime = 1.5f;
 
     public void PlayGame()
     {
@@ -19,9 +20,22 @@ public class LevelLoaderScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void ReturnToMenu()
+    {
+        StartCoroutine(LoadLevel("Menu"));
+    }
+
     private IEnumerator LoadLevel(string levelName)
     {
-        transition.SetTrigger("Start");
+        if(wizard != null)
+        {
+            wizard.SetTrigger("Drop");
+        }
+        if(transition != null)
+        {
+            transition.SetTrigger("Start");
+        }
+        Time.timeScale = 1f;
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelName);
     }

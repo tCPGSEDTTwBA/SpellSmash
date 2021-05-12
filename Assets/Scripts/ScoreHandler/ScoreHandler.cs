@@ -1,9 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreHandler : MonoBehaviour
 {
 
     private int Score;
+    public TextMeshProUGUI text;
 
     public int CalculateScore(string word)
     {
@@ -20,12 +24,13 @@ public class ScoreHandler : MonoBehaviour
             }
         }
 
+        text.text = "Score: " + Score;
         return score;
     }
 
-    public void AddToTotalScore(int score)
+    public void AddToTotal(int score)
     {
-        Score += score;
+        this.Score += score;
     }
 
     public int GetScore()

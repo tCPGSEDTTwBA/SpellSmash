@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BlockHandler : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class BlockHandler : MonoBehaviour
     public GameObject block;
     public WordHandler wordHandler;
     public ScoreHandler scoreHandler;
+    public PreviewScript nextLetterGUI;
+
+    public GameObject floatingScorePrefab;
 
     private GameObject activeBlock;
 
@@ -31,19 +35,41 @@ public class BlockHandler : MonoBehaviour
                 if(wordString != string.Empty)
                 {
                     var score = scoreHandler.CalculateScore(wordString);
-                    scoreHandler.AddToTotalScore(score);
+                    scoreHandler.AddToTotal(score);
+                    if(floatingScorePrefab != null)
+                    {
+                        var transformAt = wordBlocks[0].transform;
+                        ShowFloatingScoreText(score, transformAt.transform.TransformPoint(transformAt.position));
+                    }
                 }
                 if(wordBlocks != null && wordBlocks.Count > 0)
                 {
+                    wordBlocks.ForEach(x => x.transform.position = new Vector3(100, 100, 0));
                     wordBlocks.ForEach(x => Destroy(x));
+                    foreach(GameObject blockObject in blockStore.GetAllBlocks())
+                    {
+                        if (blockObject != null)
+                        {
+                            blockObject.layer = 2;
+                            blockObject.GetComponent<Block>().CheckCollision();
+                            blockObject.layer = 0;
+                        }
+                    }
                 }
 
                 activeBlock.layer = 0;
                 ClearActiveBlock();
                 activeBlock = SpawnBlock();
                 userInputHandler.SetActiveObject(activeBlock);
+                nextLetterGUI.RefreshText();
             }
         }
+    }
+
+    private void ShowFloatingScoreText(int score, Vector3 position)
+    {
+        var floatingText = Instantiate(floatingScorePrefab, position, Quaternion.identity);
+        floatingText.GetComponent<FloatingText>().SetText("+" + score.ToString());
     }
 
     /*
