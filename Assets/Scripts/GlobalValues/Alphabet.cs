@@ -11,12 +11,24 @@ public class Alphabet
 
     private static List<char> letterQueue = new List<char>();
 
+    private static bool demoMode = true;
+
     static Alphabet()
     {
-        for(int x = 0; x < initialQueueSize; x++)
+        if (!demoMode)
         {
-            letterQueue.Add(GetRandomLetter());
+            for (int x = 0; x < initialQueueSize; x++)
+            {
+                letterQueue.Add(GetRandomLetter());
+            }
+        } else
+        {
+            letterQueue.Add('C');
+            letterQueue.Add('G');
+            letterQueue.Add('E');
+            letterQueue.Add('A');
         }
+        
     }
 
     public static char GetRandomLetter()
