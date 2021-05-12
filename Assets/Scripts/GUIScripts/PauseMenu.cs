@@ -30,7 +30,6 @@ public class PauseMenu : MonoBehaviour
 
     private void Pause()
     {
-        Debug.Log("Paused" + IsPaused);
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         IsPaused = true;
@@ -38,7 +37,6 @@ public class PauseMenu : MonoBehaviour
 
     private void Resume()
     {
-        Debug.Log("Resumed" + IsPaused);
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;

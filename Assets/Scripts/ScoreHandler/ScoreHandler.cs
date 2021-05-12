@@ -9,7 +9,7 @@ public class ScoreHandler : MonoBehaviour
     private int Score;
     public TextMeshProUGUI text;
 
-    public void CalculateScore(string word)
+    public int CalculateScore(string word)
     {
         int score = 0;
 
@@ -24,8 +24,13 @@ public class ScoreHandler : MonoBehaviour
             }
         }
 
-        Score += score;
         text.text = "Score: " + Score;
+        return score;
+    }
+
+    public void AddToTotal(int score)
+    {
+        this.Score += score;
     }
 
     public int GetScore()

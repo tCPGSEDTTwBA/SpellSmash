@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BlockHandler : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BlockHandler : MonoBehaviour
     public WordHandler wordHandler;
     public ScoreHandler scoreHandler;
     public PreviewScript nextLetterGUI;
+
+    public GameObject floatingScorePrefab;
 
     private GameObject activeBlock;
 
@@ -31,8 +34,13 @@ public class BlockHandler : MonoBehaviour
                 string wordString = wordHandler.ParseWord(wordBlocks);
                 if(wordString != string.Empty)
                 {
-                    scoreHandler.CalculateScore(wordString);
-                    Debug.Log(scoreHandler.GetScore());
+                    var score = scoreHandler.CalculateScore(wordString);
+                    scoreHandler.AddToTotal(score);
+                    if(floatingScorePrefab != null)
+                    {
+                        var transformAt = wordBlocks[0].transform;
+                        ShowFloatingScoreText(score, transformAt.transform.TransformPoint(transformAt.position));
+                    }
                 }
                 if(wordBlocks != null && wordBlocks.Count > 0)
                 {
@@ -56,6 +64,12 @@ public class BlockHandler : MonoBehaviour
                 nextLetterGUI.RefreshText();
             }
         }
+    }
+
+    private void ShowFloatingScoreText(int score, Vector3 position)
+    {
+        var floatingText = Instantiate(floatingScorePrefab, position, Quaternion.identity);
+        floatingText.GetComponent<FloatingText>().SetText("+" + score.ToString());
     }
 
     /*

@@ -22,7 +22,6 @@ public class LevelLoaderScript : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        Time.timeScale = 1f;
         StartCoroutine(LoadLevel("Menu"));
     }
 
@@ -36,6 +35,7 @@ public class LevelLoaderScript : MonoBehaviour
         {
             transition.SetTrigger("Start");
         }
+        Time.timeScale = 1f;
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelName);
     }
