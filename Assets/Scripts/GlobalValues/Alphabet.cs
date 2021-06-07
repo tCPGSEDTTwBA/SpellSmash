@@ -13,10 +13,23 @@ public class Alphabet
 
     static Alphabet()
     {
-        for(int x = 0; x < initialQueueSize; x++)
+        /*for(int x = 0; x < initialQueueSize; x++)
         {
             letterQueue.Add(GetRandomLetter());
-        }
+        }*/
+        letterQueue.Add('C');
+        letterQueue.Add('G');
+        letterQueue.Add('E');
+        letterQueue.Add('A');
+        letterQueue.Add('C');
+        letterQueue.Add('O');
+        letterQueue.Add('O');
+        letterQueue.Add('X');
+        letterQueue.Add('K');
+        letterQueue.Add('B');
+        letterQueue.Add('O');
+        letterQueue.Add('O');
+        letterQueue.Add('K');
     }
 
     public static char GetRandomLetter()
