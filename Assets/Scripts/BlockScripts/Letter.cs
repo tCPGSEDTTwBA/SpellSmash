@@ -5,14 +5,12 @@ using UnityEngine;
 public class Letter 
 {
     public string letter = string.Empty;
-    public int engWeight = 0;
-    public int frWeight = 0;
+    public int weight = 0;
 
-    public void defineLetter(string n, int ew, int fw)
+    public void defineLetter(string n, int weight)
     {
         this.letter = n;
-        this.engWeight = w;
-        this.frWeight = fw;
+        this.weight = w;
 
     }
 

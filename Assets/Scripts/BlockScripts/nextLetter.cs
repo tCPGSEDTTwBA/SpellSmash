@@ -18,6 +18,11 @@ public class nextLetter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    private string generateNextLetter(){
+
         // totalWeight is the sum of all alphabet' weight
 
         int randomNumber = _rnd.Next(0, totalWeight);
@@ -36,4 +41,5 @@ public class nextLetter : MonoBehaviour
 
         return selectedLetter;
     }
+
 }
