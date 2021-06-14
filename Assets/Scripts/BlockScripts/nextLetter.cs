@@ -7,8 +7,6 @@ public class nextLetter : MonoBehaviour
 {
     private static Random _rnd = new Random();
 
-    public static Letter alphabet(List<string> alphabet, int totalWeight);
-
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +19,7 @@ public class nextLetter : MonoBehaviour
         
     }
 
-    private string generateNextLetter(){
+    public static string getNextLetter(List<string> alphabet, int totalWeight){
 
         // totalWeight is the sum of all alphabet' weight
 
@@ -32,14 +30,15 @@ public class nextLetter : MonoBehaviour
         {
             if (randomNumber < letter.Weight)
             {
-                selectedLetter = letter;
+                return selectedLetter;
                 break;
             }
 
             randomNumber = randomNumber - letter.Weight;
         }
 
-        return selectedLetter;
+        return "";
+
     }
 
 }
