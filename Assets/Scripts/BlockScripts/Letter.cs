@@ -10,8 +10,7 @@ public class Letter
     public void defineLetter(string n, int weight)
     {
         this.letter = n;
-        this.weight = w;
-
+        this.weight = weight;
     }
 
 }
