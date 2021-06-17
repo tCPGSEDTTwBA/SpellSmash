@@ -1,16 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Letter;
 
-public class nextLetter : MonoBehaviour
+public class NextLetter : MonoBehaviour
 {
-    private static Random _rnd = new Random();
-
     // Start is called before the first frame update
     void Start()
     {
-        alphabet = createAlphabet(language);
+        //alphabet = createAlphabet(language);
     }
 
     // Update is called once per frame
@@ -19,26 +15,24 @@ public class nextLetter : MonoBehaviour
         
     }
 
-    public static string getNextLetter(List<string> alphabet, int totalWeight){
+    public static string getNextLetter(List<Letter> alphabet, int totalWeight){
 
         // totalWeight is the sum of all alphabet' weight
 
-        int randomNumber = _rnd.Next(0, totalWeight);
+        int randomNumber = Random.Range(0, totalWeight);
 
         string selectedLetter = null;
-        foreach (Letter letter in alphabet)
+        foreach(Letter letter in alphabet)
         {
-            if (randomNumber < letter.Weight)
+            if (randomNumber < letter.weight)
             {
                 return selectedLetter;
-                break;
             }
 
-            randomNumber = randomNumber - letter.Weight;
+            randomNumber = randomNumber - letter.weight;
         }
 
         return "";
-
     }
 
 }
