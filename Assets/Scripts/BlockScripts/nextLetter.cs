@@ -7,7 +7,7 @@ public class NextLetter : MonoBehaviour
     public static char GetNextLetter(List<Letter> alphabet)
     {
         int totalWeight = 0;
-        char val = new char();
+        char val = '\0';
 
         foreach (var letter in alphabet)
         {
@@ -21,10 +21,6 @@ public class NextLetter : MonoBehaviour
             if (randomNumber < letter.Weight)
             {
                 val = letter.Value;
-            }
-            else
-            {
-                val = '\0';
             }
             randomNumber -= letter.Value;
         }
