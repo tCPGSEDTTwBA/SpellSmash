@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Alphabet
 {
-    public static char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
     public static int initialQueueSize = 3;
 
@@ -15,18 +14,18 @@ public class Alphabet
     {
         for(int x = 0; x < initialQueueSize; x++)
         {
-            letterQueue.Add(GetRandomLetter());
+            letterQueue.Add(GetWeightedLetter());
         }
     }
 
-    public static char GetRandomLetter()
+    public static char GetWeightedLetter()
     {
-        return alphabet[Random.Range(0, alphabet.Length)];
+        return NextLetter.GetNextLetter(LetterList.GetLetters());
     }
 
     public static char GetNextLetter()
     {
-        letterQueue.Add(GetRandomLetter());
+        letterQueue.Add(GetWeightedLetter());
         char charToReturn = letterQueue.ElementAt(0);
         letterQueue.RemoveAt(0);
         return charToReturn;

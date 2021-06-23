@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Letter 
+public class Letter
 {
-    public string letter = string.Empty;
-    public int weight = 0;
+    public char Label { get; }
+    public int Value { get; }
 
-    public void defineLetter(string n, int weight)
+    public Letter(char label, int value)
     {
-        this.letter = n;
-        this.weight = weight;
+        Label = label;
+        Value = value;
     }
-
 }
