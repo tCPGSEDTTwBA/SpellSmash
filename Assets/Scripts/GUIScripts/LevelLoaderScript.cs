@@ -9,9 +9,10 @@ public class LevelLoaderScript : MonoBehaviour
     public Animator wizard;
     public float transitionTime = 1.5f;
 
-    public void PlayGame() //options param, french vs english
+    public void PlayGame()
     {
-        WordStore.GenerateWords(); //language param
+        var language = Languages.GetLanguage();
+        WordStore.GenerateWords(language); 
         StartCoroutine(LoadLevel("Level"));
     }
 

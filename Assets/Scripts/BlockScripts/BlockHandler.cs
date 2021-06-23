@@ -55,7 +55,6 @@ public class BlockHandler : MonoBehaviour
                             blockObject.layer = 0;
                         }
                     }
-                    wizardHandler.popUp();
                 }
 
                 activeBlock.layer = 0;
