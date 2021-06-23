@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Letter
 {
-    public char Label { get; }
-    public int Value { get; }
+    public char Value { get; }
+    public int Weight { get; set; } = 1;
 
-    public Letter(char label, int value)
+    public Letter(char value, int weight)
     {
-        Label = label;
         Value = value;
+        Weight = weight;
     }
 }
