@@ -11,7 +11,7 @@ public class NextLetter : MonoBehaviour
 
         foreach (var letter in alphabet)
         {
-            totalWeight += letter.Value;
+            totalWeight += letter.Weight;
         }
 
         int randomNumber = Random.Range(0, totalWeight);
@@ -22,7 +22,7 @@ public class NextLetter : MonoBehaviour
             {
                 val = letter.Value;
             }
-            randomNumber -= letter.Value;
+            randomNumber -= letter.Weight;
         }
 
         return val;
