@@ -15,12 +15,12 @@ public class ScoreHandler : MonoBehaviour
 
         if (word != string.Empty)
         {
-            var dictionary = LetterDictionary.getLetters();
+            var letters = LetterList.GetScoreDictionary();
             var letterArray = word.ToCharArray();
 
             foreach (char letter in letterArray)
             {
-                score += dictionary[letter];
+                score += letters[letter];
             }
         }
 
