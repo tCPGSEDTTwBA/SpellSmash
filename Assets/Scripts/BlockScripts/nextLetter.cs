@@ -3,36 +3,28 @@ using UnityEngine;
 
 public class NextLetter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public static char GetNextLetter(List<Letter> alphabet)
     {
-        //alphabet = createAlphabet(language);
-    }
+        int totalWeight = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public static string getNextLetter(List<Letter> alphabet, int totalWeight){
-
-        // totalWeight is the sum of all alphabet' weight
+        foreach (var letter in alphabet)
+        {
+            totalWeight += letter.Weight;
+        }
 
         int randomNumber = Random.Range(0, totalWeight);
 
-        string selectedLetter = null;
-        foreach(Letter letter in alphabet)
+        foreach (var letter in alphabet)
         {
-            if (randomNumber < letter.weight)
+            if (randomNumber < letter.Weight)
             {
-                return selectedLetter;
+                return letter.Value;
             }
-
-            randomNumber = randomNumber - letter.weight;
+            randomNumber -= letter.Weight;
         }
 
-        return "";
+        return '\0';
     }
 
 }

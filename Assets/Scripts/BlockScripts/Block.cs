@@ -13,8 +13,8 @@ public class Block : MonoBehaviour
 
     private void Awake()
     {
-        this.value = Alphabet.GetNextLetter().ToString();
-        text.text = this.value;
+        value = Alphabet.GetNextLetter().ToString();
+        text.text = value;
     }
 
     private void Start()
