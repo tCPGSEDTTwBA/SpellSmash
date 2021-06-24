@@ -11,7 +11,8 @@ public class LevelLoaderScript : MonoBehaviour
 
     public void PlayGame()
     {
-        WordStore.GenerateWords();
+        var language = Languages.GetLanguage();
+        WordStore.GenerateWords(language); 
         StartCoroutine(LoadLevel("Level"));
     }
 
