@@ -14,7 +14,7 @@ public class PreviewScript : MonoBehaviour
 
     public void RefreshText()
     {
-        var letterQueue = Alphabet.GetLetterQueue();
+        var letterQueue = LetterQueue.GetLetterQueue();
         for (int x = 0; x < previewTexts.Count && x < letterQueue.Count; x++)
         {
             if (previewTexts[x] != null)
