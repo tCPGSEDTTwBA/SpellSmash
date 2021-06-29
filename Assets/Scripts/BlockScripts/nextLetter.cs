@@ -4,7 +4,7 @@ using UnityEngine;
 public class NextLetter : MonoBehaviour
 {
 
-    public static char GetNextLetter(List<Letter> alphabet)
+    public static Letter GetNextLetter(List<Letter> alphabet)
     {
         int totalWeight = 0;
 
@@ -19,12 +19,12 @@ public class NextLetter : MonoBehaviour
         {
             if (randomNumber < letter.Weight)
             {
-                return letter.Value;
+                return letter;
             }
             randomNumber -= letter.Weight;
         }
 
-        return '\0';
+        return null;
     }
 
 }

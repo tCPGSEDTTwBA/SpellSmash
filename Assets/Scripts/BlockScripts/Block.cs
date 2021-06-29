@@ -6,6 +6,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     public TextMeshProUGUI text;
+    public TextMeshProUGUI scoreText;
     private string value;
 
     //The lower the update interval, the faster command are issued to the active block
@@ -13,7 +14,9 @@ public class Block : MonoBehaviour
 
     private void Awake()
     {
-        value = Alphabet.GetNextLetter().ToString();
+        Letter letter = Alphabet.GetNextLetter();
+        value = letter.Value.ToString();
+        scoreText.text = letter.Score.ToString();
         text.text = value;
     }
 

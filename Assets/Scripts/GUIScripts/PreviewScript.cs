@@ -6,6 +6,7 @@ using UnityEngine;
 public class PreviewScript : MonoBehaviour
 {
     public List<TextMeshProUGUI> previewTexts;
+    public List<TextMeshProUGUI> previewTextScores;
 
     private void Start()
     {
@@ -19,7 +20,8 @@ public class PreviewScript : MonoBehaviour
         {
             if (previewTexts[x] != null)
             {
-                previewTexts[x].text = letterQueue[x].ToString();
+                previewTexts[x].text = letterQueue[x].Value.ToString();
+                previewTextScores[x].text = letterQueue[x].Score.ToString();
             }
         }
     }
