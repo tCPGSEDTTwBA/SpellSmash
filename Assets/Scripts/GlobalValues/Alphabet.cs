@@ -8,7 +8,7 @@ public class Alphabet
 
     public static int initialQueueSize = 3;
 
-    private static List<char> letterQueue = new List<char>();
+    private static List<Letter> letterQueue = new List<Letter>();
 
     static Alphabet()
     {
@@ -18,20 +18,20 @@ public class Alphabet
         }
     }
 
-    public static char GetWeightedLetter()
+    public static Letter GetWeightedLetter()
     {
         return NextLetter.GetNextLetter(LetterList.GetLetters());
     }
 
-    public static char GetNextLetter()
+    public static Letter GetNextLetter()
     {
         letterQueue.Add(GetWeightedLetter());
-        char charToReturn = letterQueue.ElementAt(0);
+        Letter letterToReturn = letterQueue.ElementAt(0);
         letterQueue.RemoveAt(0);
-        return charToReturn;
+        return letterToReturn;
     }
 
-    public static List<char> GetLetterQueue()
+    public static List<Letter> GetLetterQueue()
     {
         return letterQueue;
     }
