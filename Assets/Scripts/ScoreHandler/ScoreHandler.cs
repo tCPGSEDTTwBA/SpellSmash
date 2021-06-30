@@ -15,7 +15,7 @@ public class ScoreHandler : MonoBehaviour
 
         if (word != string.Empty)
         {
-            var letters = LetterList.GetScoreDictionary();
+            var letters = Alphabet.GetScoreDictionary();
             var letterArray = word.ToCharArray();
 
             foreach (char letter in letterArray)
