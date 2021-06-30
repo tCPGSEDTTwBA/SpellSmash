@@ -29,7 +29,7 @@ public class ScoreHandler : MonoBehaviour
         }
 
         if(dialogueHandler != null) {
-            if(wizard != null && score >= 2) {
+            if(wizard != null && score >= 3) {
                 dialogueHandler.SetPrompt();
                 wizard.SetTrigger("Popup");
             }
