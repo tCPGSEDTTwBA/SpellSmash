@@ -8,6 +8,10 @@ public class ScoreHandler : MonoBehaviour
 
     private int ScoreTotal;
     public TextMeshProUGUI text;
+    [SerializeField]
+    private Animator wizard;
+    [SerializeField]
+    private DialogueHandler dialogueHandler;
 
     public int CalculateScore(string word)
     {
@@ -15,12 +19,19 @@ public class ScoreHandler : MonoBehaviour
 
         if (word != string.Empty)
         {
-            var letters = LetterList.GetScoreDictionary();
+            var letters = Alphabet.GetScoreDictionary();
             var letterArray = word.ToCharArray();
 
             foreach (char letter in letterArray)
             {
                 score += letters[letter];
+            }
+        }
+
+        if(dialogueHandler != null) {
+            if(wizard != null && score >= 2) {
+                dialogueHandler.SetPrompt();
+                wizard.SetTrigger("Popup");
             }
         }
 

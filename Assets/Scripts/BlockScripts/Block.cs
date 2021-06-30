@@ -13,7 +13,7 @@ public class Block : MonoBehaviour
 
     private void Awake()
     {
-        value = Alphabet.GetNextLetter().ToString();
+        value = LetterQueue.GetNextLetter().ToString();
         text.text = value;
     }
 
