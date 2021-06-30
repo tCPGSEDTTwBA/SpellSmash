@@ -14,7 +14,7 @@ public class Block : MonoBehaviour
 
     private void Awake()
     {
-        Letter letter = Alphabet.GetNextLetter();
+        Letter letter = LetterQueue.GetNextLetter();
         value = letter.Value.ToString();
         scoreText.text = letter.Score.ToString();
         text.text = value;
