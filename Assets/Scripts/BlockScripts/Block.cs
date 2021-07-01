@@ -9,7 +9,6 @@ public class Block : MonoBehaviour
     public TextMeshProUGUI text;
     public TextMeshProUGUI scoreText;
     private string value;
-    private bool hasHeld = false;
 
     //The lower the update interval, the faster command are issued to the active block
     public float updateInterval = 0.25f;
@@ -67,11 +66,6 @@ public class Block : MonoBehaviour
     public void Update()
     {
         CheckCollision();
-    }
-
-    public void ToggleHasBeenHeld()
-    {
-        this.hasHeld = true;
     }
 
     public void CheckCollision()
