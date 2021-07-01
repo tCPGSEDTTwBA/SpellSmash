@@ -1,0 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class BlockHolder : MonoBehaviour
+{
+    private Letter letter;
+    [SerializeField]
+    private GameObject previewUI;
+    [SerializeField]
+    private TextMeshProUGUI previewText;
+    [SerializeField]
+    private TextMeshProUGUI previewScore;
+
+    private void Update()
+    {
+        if(HasLetter()) {
+            UpdatePreview();
+        }
+    }
+
+    private void UpdatePreview()
+    {
+        if(HasLetter()) {
+            previewText.text = letter.Value.ToString();
+            previewScore.text = letter.Score.ToString();
+        }
+    }
+
+    public void HoldLetter(Letter letter)
+    {
+        this.letter = letter;
+        previewUI.gameObject.SetActive(true);
+    }
+
+    public Letter UseLetter()
+    {
+        if(HasLetter()) {
+            previewUI.gameObject.SetActive(false);
+            return letter;
+        }
+        return null;
+    }
+
+    public bool HasLetter()
+    {
+        return (previewUI.activeSelf && letter != null);
+    }
+
+}

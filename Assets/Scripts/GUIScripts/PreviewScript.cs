@@ -8,7 +8,7 @@ public class PreviewScript : MonoBehaviour
     public List<TextMeshProUGUI> previewTexts;
     public List<TextMeshProUGUI> previewTextScores;
 
-    private void Start()
+    private void FixedUpdate()
     {
         RefreshText();
     }

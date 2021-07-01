@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class LetterQueue
+static class LetterQueue
 {
 
     public static int initialQueueSize = 3;
@@ -34,6 +34,11 @@ public class LetterQueue
     public static List<Letter> GetLetterQueue()
     {
         return letterQueue;
+    }
+
+    public static void SkipQueue(Letter letter)
+    {
+        letterQueue.Insert(0, letter);
     }
 
 }

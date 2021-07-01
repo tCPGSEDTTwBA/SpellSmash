@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    private Letter letter;
     public TextMeshProUGUI text;
     public TextMeshProUGUI scoreText;
     private string value;
@@ -14,10 +15,15 @@ public class Block : MonoBehaviour
 
     private void Awake()
     {
-        Letter letter = LetterQueue.GetNextLetter();
+        letter = LetterQueue.GetNextLetter();
         value = letter.Value.ToString();
         scoreText.text = letter.Score.ToString();
         text.text = value;
+    }
+
+    public Letter GetLetter()
+    {
+        return this.letter;
     }
 
     private void Start()
