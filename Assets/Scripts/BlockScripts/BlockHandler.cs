@@ -7,11 +7,11 @@ public class BlockHandler : MonoBehaviour
 {
     public UserInputHandler userInputHandler;
     public BlockStore blockStore;
+    public BlockHolder blockHolder;
     public ObjectSpawner blockSpawner;
     public GameObject block;
     public WordHandler wordHandler;
     public ScoreHandler scoreHandler;
-    public PreviewScript nextLetterGUI;
 
     public GameObject floatingScorePrefab;
 
@@ -59,10 +59,11 @@ public class BlockHandler : MonoBehaviour
 
                 activeBlock.layer = 0;
                 ClearActiveBlock();
-                activeBlock = SpawnBlock();
-                userInputHandler.SetActiveObject(activeBlock);
-                nextLetterGUI.RefreshText();
             }
+        }
+        if(activeBlock == null) {
+            activeBlock = SpawnBlock();
+            userInputHandler.SetActiveObject(activeBlock);
         }
     }
 
@@ -85,11 +86,6 @@ public class BlockHandler : MonoBehaviour
     public void StoreBlock(GameObject block)
     {
         blockStore.AddBlock(block);
-    }
-
-    public GameObject GetActiveBlock()
-    {
-        return this.activeBlock;
     }
 
     public void ClearActiveBlock()

@@ -9,6 +9,9 @@ public class UserInputHandler : MonoBehaviour
     public static bool shouldStartReplay;
     private GameObject activeObject;
 
+    [SerializeField]
+    private BlockHolder blockHolder;
+
     public void Move(InputAction.CallbackContext context)
     {
         if (activeObject != null) {
@@ -21,6 +24,19 @@ public class UserInputHandler : MonoBehaviour
                     oldCommands.Add(command);
                     command.Execute();
                 }
+            }
+        }
+    }
+
+    public void HoldLetter(InputAction.CallbackContext context)
+    {
+        if (context.performed) {
+            if(blockHolder.HasLetter()) {
+                Letter letter = blockHolder.UseLetter();
+                LetterQueue.SkipQueue(letter);
+            } else if(activeObject != null) {
+                blockHolder.HoldLetter(activeObject.GetComponent<Block>().GetLetter());
+                Destroy(activeObject);
             }
         }
     }

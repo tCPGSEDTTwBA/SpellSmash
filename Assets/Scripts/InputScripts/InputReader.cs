@@ -25,6 +25,14 @@ public class @InputReader : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=1)""
+                },
+                {
+                    ""name"": ""SpecialActions"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""122a1cdf-8a23-454e-9dcb-83adfada5f19"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -115,6 +123,17 @@ public class @InputReader : IInputActionCollection, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2538415-58aa-4946-95e1-50b893da543b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialActions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -151,6 +170,7 @@ public class @InputReader : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_SpecialActions = m_Player.FindAction("SpecialActions", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -204,11 +224,13 @@ public class @InputReader : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_SpecialActions;
     public struct PlayerActions
     {
         private @InputReader m_Wrapper;
         public PlayerActions(@InputReader wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @SpecialActions => m_Wrapper.m_Player_SpecialActions;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -221,6 +243,9 @@ public class @InputReader : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @SpecialActions.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialActions;
+                @SpecialActions.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialActions;
+                @SpecialActions.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialActions;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -228,6 +253,9 @@ public class @InputReader : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @SpecialActions.started += instance.OnSpecialActions;
+                @SpecialActions.performed += instance.OnSpecialActions;
+                @SpecialActions.canceled += instance.OnSpecialActions;
             }
         }
     }
@@ -268,6 +296,7 @@ public class @InputReader : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnSpecialActions(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

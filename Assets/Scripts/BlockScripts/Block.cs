@@ -5,19 +5,26 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    private Letter letter;
     public TextMeshProUGUI text;
     public TextMeshProUGUI scoreText;
     private string value;
+    private bool hasHeld = false;
 
     //The lower the update interval, the faster command are issued to the active block
     public float updateInterval = 0.25f;
 
     private void Awake()
     {
-        Letter letter = LetterQueue.GetNextLetter();
+        letter = LetterQueue.GetNextLetter();
         value = letter.Value.ToString();
         scoreText.text = letter.Score.ToString();
         text.text = value;
+    }
+
+    public Letter GetLetter()
+    {
+        return this.letter;
     }
 
     private void Start()
@@ -60,6 +67,11 @@ public class Block : MonoBehaviour
     public void Update()
     {
         CheckCollision();
+    }
+
+    public void ToggleHasBeenHeld()
+    {
+        this.hasHeld = true;
     }
 
     public void CheckCollision()
