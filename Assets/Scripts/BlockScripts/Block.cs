@@ -9,6 +9,8 @@ public class Block : MonoBehaviour
     public TextMeshProUGUI text;
     public TextMeshProUGUI scoreText;
     private string value;
+    private bool landed = false;
+    private bool sfxPlayed = false;
 
     //The lower the update interval, the faster command are issued to the active block
     public float updateInterval = 0.25f;
@@ -45,6 +47,8 @@ public class Block : MonoBehaviour
         if(freeDirections[1])
         {
             new MoveCommand(this.GetComponent<Rigidbody2D>(), Vector3.down).Execute();
+        } else {
+            landed = true;
         }
     }
 
@@ -66,6 +70,10 @@ public class Block : MonoBehaviour
     public void Update()
     {
         CheckCollision();
+        if (!sfxPlayed && landed) {
+            FindObjectOfType<AudioManager>().Play("BlockImpact");
+            sfxPlayed = true;
+        }
     }
 
     public void CheckCollision()
