@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class TimerScript : MonoBehaviour
 {
-    public static float defaultTime = 100f;
+    public static int defaultTime = 90;
+    private static int playerTime;
     private static float time = defaultTime;
     private bool running = false;
 
@@ -13,12 +14,13 @@ public class TimerScript : MonoBehaviour
 
     private void Awake()
     {
-        time = defaultTime;
+        playerTime = PlayerPrefs.GetInt("timelimit", defaultTime);
+        time = playerTime;
     }
 
     public void ResetTimer()
     {
-        time = defaultTime;
+        time = playerTime;
     }
 
     public void ToggleTimer()
@@ -55,6 +57,16 @@ public class TimerScript : MonoBehaviour
     public float TimeLeft()
     {
         return time;
+    }
+
+    public void HideTimer()
+    {
+        text.enabled = false;
+    }
+
+    public void ShowTimer()
+    {
+        text.enabled = true;
     }
 
 }
