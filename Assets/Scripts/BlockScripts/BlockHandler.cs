@@ -40,6 +40,7 @@ public class BlockHandler : MonoBehaviour
                     {
                         var transformAt = wordBlocks[0].transform;
                         ShowFloatingScoreText(score, transformAt.transform.TransformPoint(transformAt.position));
+                        FindObjectOfType<AudioManager>().Play("Ding");
                     }
                 }
                 if(wordBlocks != null && wordBlocks.Count > 0)
