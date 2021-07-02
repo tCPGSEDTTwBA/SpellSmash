@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Block : MonoBehaviour
 {
     private Letter letter;
     public TextMeshProUGUI text;
     public TextMeshProUGUI scoreText;
+    public Image backGroundImage;
+    public ParticleSystem particles;
     private string value;
     private bool landed = false;
     private bool sfxPlayed = false;
+    private bool isMultiplier = false;
 
     //The lower the update interval, the faster command are issued to the active block
     public float updateInterval = 0.25f;
@@ -18,6 +22,14 @@ public class Block : MonoBehaviour
     private void Awake()
     {
         letter = LetterQueue.GetNextLetter();
+        isMultiplier = letter.isMultiplier;
+        if(isMultiplier) {
+            backGroundImage.gameObject.SetActive(true);
+            particles.gameObject.SetActive(true);
+
+            backGroundImage.color = new Color32(208, 177, 62, 255);
+        }
+
         value = letter.Value.ToString();
         scoreText.text = letter.Score.ToString();
         text.text = value;

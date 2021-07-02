@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlockHolder : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class BlockHolder : MonoBehaviour
     private TextMeshProUGUI previewText;
     [SerializeField]
     private TextMeshProUGUI previewScore;
+    [SerializeField]
+    private Image backgroundImage;
 
     private void Update()
     {
@@ -25,6 +28,9 @@ public class BlockHolder : MonoBehaviour
         if(HasLetter()) {
             previewText.text = letter.Value.ToString();
             previewScore.text = letter.Score.ToString();
+            if(letter.isMultiplier) {
+                backgroundImage.color = new Color32(208, 177, 62, 255);
+            }
         }
     }
 

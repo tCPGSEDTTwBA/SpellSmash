@@ -7871,6 +7871,7 @@ MonoBehaviour:
   previewUI: {fileID: 60408799}
   previewText: {fileID: 1112925093}
   previewScore: {fileID: 851920423}
+  backgroundImage: {fileID: 60408801}
 --- !u!1 &888028357
 GameObject:
   m_ObjectHideFlags: 0
@@ -9107,6 +9108,10 @@ MonoBehaviour:
   - {fileID: 804795617}
   - {fileID: 1505921183}
   - {fileID: 1155883527}
+  backgroundImages:
+  - {fileID: 33124754}
+  - {fileID: 1130523729}
+  - {fileID: 618803190}
 --- !u!114 &1276955224
 MonoBehaviour:
   m_ObjectHideFlags: 0

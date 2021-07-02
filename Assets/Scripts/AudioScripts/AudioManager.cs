@@ -44,8 +44,6 @@ public class AudioManager : MonoBehaviour
         if(soundsToPlay != null) {
             Array.ForEach(soundsToPlay, sound => sound.source.Play());
         }
-
-        Array.ForEach(sounds, sound => Debug.Log("Sound name: " + sound.name + " source: " + sound.source.name));
     }
 
     public void Play(string soundName)

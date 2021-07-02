@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PreviewScript : MonoBehaviour
 {
     public List<TextMeshProUGUI> previewTexts;
     public List<TextMeshProUGUI> previewTextScores;
+    public List<Image> backgroundImages;
 
     private void FixedUpdate()
     {
@@ -22,6 +24,11 @@ public class PreviewScript : MonoBehaviour
             {
                 previewTexts[x].text = letterQueue[x].Value.ToString();
                 previewTextScores[x].text = letterQueue[x].Score.ToString();
+                if(letterQueue[x].isMultiplier) {
+                    backgroundImages[x].color = new Color32(208, 177, 62, 255);
+                } else {
+                    backgroundImages[x].color = new Color32(124, 139, 154, 255);
+                }
             }
         }
     }
